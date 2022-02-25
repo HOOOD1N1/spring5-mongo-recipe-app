@@ -2,6 +2,7 @@ package edy.springframework.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.math.BigDecimal;
 
@@ -16,6 +17,7 @@ public class Ingredient {
     private String description;
     private BigDecimal amount;
 
+    @DBRef
     private UnitOfMeasure uom;
     private Recipe recipe;
 
@@ -32,7 +34,7 @@ public class Ingredient {
         this.description = description;
         this.amount = amount;
         this.uom = uom;
-        this.recipe = recipe;
+//        this.recipe = recipe;
     }
 
 }
