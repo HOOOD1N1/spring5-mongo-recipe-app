@@ -155,6 +155,19 @@
                                         ' - ' + ingredient.getDescription())}">1 Teaspoon of Sugar
                                         </li>
                                     </ul>
+                                    <!-- w/ the thymeleaf tag on the field, gives us an array that Spring will bind to,
+  regenerating the list-->
+                                    <!-- mongo doesn't do the merge like a RDBMS, so it merges them and reattaches them -->
+                                    <!-- for categories, spring MVC will bind to a List, not a Set-->
+                                    <div th:each="ingredientEach, idx : ${recipe.ingredients}" >
+                                        <input  type="hidden" th:field="*{ingredients[__${idx.index}__].id}" />
+                                        <input  type="hidden" th:field="*{ingredients[__${idx.index}__].description}" />
+                                        <input  type="hidden" th:field="*{ingredients[__${idx.index}__].amount}" />
+                                        <input  type="hidden" th:field="*{ingredients[__${idx.index}__].uom.id}" />
+                                    </div>
+                                    <div th:each="catEach, idx : ${recipe.categories}" >
+                                        <input  type="hidden" th:field="*{categories[__${idx.index}__].id}" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -188,5 +201,9 @@
         </div>
     </div>
 </div>
+
+
+
+
 </body>
 </html>
