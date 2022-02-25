@@ -4,6 +4,8 @@ import edy.springframework.domain.*;
 import edy.springframework.repositories.CategoryRepository;
 import edy.springframework.repositories.RecipeRepository;
 import edy.springframework.repositories.UnitOfMeasureRepository;
+import edy.springframework.repositories.reactive.CategoryReactiveRepository;
+import edy.springframework.repositories.reactive.RecipeReactiveRepository;
 import edy.springframework.repositories.reactive.UnitOfMeasureReactiveRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,13 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     @Autowired
     UnitOfMeasureReactiveRepository unitOfMeasureReactiveRepository;
 
+    @Autowired
+    RecipeReactiveRepository recipeReactiveRepository;
+
+    @Autowired
+    CategoryReactiveRepository categoryReactiveRepository;
+
+
     public RecipeBootstrap(CategoryRepository categoryRepository,
                            RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
         this.categoryRepository = categoryRepository;
@@ -48,6 +57,12 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         log.error("####");
         log.error("Count: " + unitOfMeasureReactiveRepository.count().block().toString());
+
+        log.error("####");
+        log.error("Count: " + recipeReactiveRepository.count().block().toString());
+
+        log.error("####");
+        log.error("Count: " + categoryReactiveRepository.count().block().toString());
     }
 
     private void loadCategories(){
